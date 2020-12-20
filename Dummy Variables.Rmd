@@ -1,0 +1,326 @@
+---
+title: "Örnekler ile for ve  if"
+author: "Hata Terimi"
+date: "19 12 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+### FOR
+
+```{r}
+
+for(i in 1:10)
+  print(i)
+```
+
+
+### IF
+
+```{r}
+a <- 10
+if(a < 5){
+  print("a  5'ten daha küçük")
+}else if(a==5){
+  print("a beştir")
+}else{
+  print("a beşten büyüktür")
+}
+```
+
+
+
+### Ekonometrik Örnekler
+
+#### Iller
+
+```{r}
+library(readxl)
+```
+
+
+```{r}
+covid19_data <- read_excel(path="C:\\Users\\YSO\\Desktop\\Covid19\\Vaka Tahmin.xlsx",sheet = "Genel",col_names = TRUE)
+iller <- covid19_data$İller[2:length(covid19_data$İller)]
+```
+
+
+```{r}
+yasak <- c("Adana","Adıyaman","Ankara","Sivas","Bursa","Van","Bitlis","Siirt")
+
+d_il <- 1:length(iller)
+
+for(i in 1:length(iller))
+  if(iller[i] %in% yasak){
+    d_il[i] = 1
+  }else{
+    d_il[i] = 0
+  }
+
+View(cbind(iller,d_il))
+```
+
+
+
+```{r}
+for(i in 1:length(iller))
+  if(il[i] == iller[i]){
+    d_il[i] = 1
+  }else{
+    d_il[i] = 0
+  }
+```
+
+
+
+
+#### Cinsiyet
+
+```{r}
+cinsiyet <- c("kadin","erkek")
+cinsiyet_vektor <- sample(x = cinsiyet,size=1000,replace=T)
+```
+
+
+```{r}
+gender <- 1:length(cinsiyet_vektor)
+
+for (i in 1:length(cinsiyet_vektor))
+  if(cinsiyet_vektor[i]=="erkek"){
+    gender[i] = 0
+  }else{
+    gender[i]= 1
+  }
+
+```
+
+
+
+
+#### Dummy Variable, Kukla, Gölge Değişken
+
+
+##### 3 AYLIK (ÇEYREKLIİK)
+
+
+$Q_i = \{^{Q_i~için~=~1}_{~~~diğer~=~0}$
+
+
+```{r}
+library(xts)
+```
+
+
+```{r}
+data <- rnorm(50)
+data_ts <-as.xts(ts(data = data,start = c(2010,1),frequency = 4))
+```
+
+```{r}
+tarih <- data.frame(Date = seq(as.Date("2010-01-01"), length.out = length(data), by = "3 months"))
+tarih$Quarter<-format(as.yearqtr(tarih$Date), "Q%q")
+colnames(tarih)<-gsub("Quarter_", "", colnames(tarih))
+quarter <- tarih$Quarter
+```
+
+
+
+
+```{r}
+
+q1 <- 1: length(data)
+for (i in 1:length(data))
+  if(quarter[i]=="Q1"){
+    q1[i] = 1
+  }else{
+    q1[i]=0
+  }
+
+
+q2 <- 1: length(data)
+for (i in 1:length(data))
+  if(quarter[i]=="Q2"){
+    q2[i] = 1
+  }else{
+    q2[i]=0
+  }
+
+
+q3 <- 1: length(data)
+for (i in 1:length(data))
+  if(quarter[i]=="Q3"){
+    q3[i] = 1
+  }else{
+    q3[i]=0
+  }
+
+q4 <- 1:length(data)
+for (i in 1:length(data))
+  if(quarter[i]=="Q4"){
+    q4[i] = 1
+  }else{
+    q4[i]= 0
+  }
+
+```
+
+
+##### AYLIK
+$M_i = \{^{M_i~için~=~1}_{~~~~diğer~=~0}$
+
+```{r}
+data_ay <- as.xts(ts(data = data,start = c(2010,1),frequency = 12))
+```
+
+```{r}
+tarih_ay <- data.frame(Date = seq(as.Date("2010-01-01"), length.out = length(data_ay), by = "months"))
+tarih_ay$Month<-format(as.yearmon(tarih_ay$Date), "M%m")
+colnames(tarih_ay)<-gsub("Months_", "", colnames(tarih_ay))
+month <- tarih_ay$Month
+```
+
+
+
+```{r}
+
+m1 <- 1: length(data)
+for (i in 1:length(data))
+  if(month[i]=="M01"){
+    m1[i] = 1
+  }else{
+    m1[i]=0
+  }
+
+
+m2 <- 1: length(data)
+for (i in 1:length(data))
+  if(month[i]=="M02"){
+    m2[i] = 1
+  }else{
+    m2[i]=0
+  }
+
+
+m3 <- 1: length(data)
+for (i in 1:length(data))
+  if(month[i]=="M03"){
+    m3[i] = 1
+  }else{
+    m3[i]=0
+  }
+
+
+m4 <- 1: length(data)
+for (i in 1:length(data))
+  if(month[i]=="M04"){
+    m4[i] = 1
+  }else{
+    m4[i]=0
+  }
+
+
+
+m5 <- 1: length(data)
+for (i in 1:length(data))
+  if(month[i]=="M05"){
+    m5[i] = 1
+  }else{
+    m5[i]=0
+  }
+
+
+m6 <- 1: length(data)
+for (i in 1:length(data))
+  if(month[i]=="M06"){
+    m6[i] = 1
+  }else{
+    m6[i]=0
+  }
+
+
+m7 <- 1: length(data)
+for (i in 1:length(data))
+  if(month[i]=="M07"){
+    m7[i] = 1
+  }else{
+    m7[i]=0
+  }
+
+
+m8 <- 1: length(data)
+for (i in 1:length(data))
+  if(month[i]=="M08"){
+    m8[i] = 1
+  }else{
+    m8[i]=0
+  }
+
+
+m9 <- 1: length(data)
+for (i in 1:length(data))
+  if(month[i]=="M09"){
+    m9[i] = 1
+  }else{
+    m9[i]=0
+  }
+
+
+
+m10 <- 1: length(data)
+for (i in 1:length(data))
+  if(month[i]=="M10"){
+    m10[i] = 1
+  }else{
+    m10[i]=0
+  }
+
+
+
+m11 <- 1: length(data)
+for (i in 1:length(data))
+  if(month[i]=="M11"){
+    m11[i] = 1
+  }else{
+    m11[i]=0
+  }
+
+
+m12 <- 1: length(data)
+for (i in 1:length(data))
+  if(month[i]=="M12"){
+    m12[i] = 1
+  }else{
+    m12[i]=0
+  }
+
+```
+
+
+```{r}
+data_yil <- ts(data=data,start = 1970,frequency = 1)
+View(data_yil)
+plot(data_yil)
+```
+
+
+```{r}
+d2008 <- 1:length(data_yil)
+yil <- 1970:(1970+length(data_yil)-1)
+
+for (i in 1:length(data_yil))
+  if(yil[i] == 2008){
+    d2008[i]=1
+  }else{
+    d2008[i]=0
+  }
+```
+
+
+
+
+
