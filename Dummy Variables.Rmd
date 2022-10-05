@@ -108,9 +108,6 @@ for (i in 1:length(cinsiyet_vektor))
 ##### 3 AYLIK (ÇEYREKLIİK)
 
 
-$Q_i = \{^{Q_i~için~=~1}_{~~~diğer~=~0}$
-
-
 ```{r}
 library(xts)
 ```
