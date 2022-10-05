@@ -168,7 +168,7 @@ for (i in 1:length(data))
 
 
 ##### AYLIK
-$M_i = \{^{M_i~için~=~1}_{~~~~diğer~=~0}$
+#$M_i = \{^{M_i~için~=~1}_{~~~~diğer~=~0}$
 
 ```{r}
 data_ay <- as.xts(ts(data = data,start = c(2010,1),frequency = 12))
